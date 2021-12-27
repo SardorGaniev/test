@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static './css/reg_style.css' %}">
+    <title>Вход/Регистрация</title>
+</head>
+<body>
+    <h2>Форма Авторизации / Регистрации</h2>
+    {% for m in messages %}
+           {{ m }}
+    {% endfor %}
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="{% url 'register' %}" method="POST">
+                 {% csrf_token %}
+                <h1>Регистрация:</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Name" name="username"/>
+                <input type="email" placeholder="Email"  name="email"/>
+                <input type="password" placeholder="Password" name="password1"/>
+                <input type="password" placeholder="Repeat the Password" name="password2"/>
+                <button type="submit">REG</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="{% url 'login' %}" method="POST">
+                  {% csrf_token %}
+                <h1>Авторизация:</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your account</span>
+                <input type="text" placeholder="Name" name="username"/>
+                <input type="password" placeholder="Password" name="password"/>
+                <a href="#">Забыли пароль ?</a>
+                <button type="submit">Войти</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Привет друг !</h1>
+                    <p>Зарегистрируйтесь чтобы оставаться с нами на связи.</p>
+                    <button class="ghost" id="signIn" type="submit">Вход</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>С возвращением</h1>
+                    <p>Введите свои личные данные для входа.</p>
+                    <button class="ghost" id="signUp" type="submit">Регистрация</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>
+            Created with <i class="fa fa-heart"></i> by
+            <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
+            - Read how I created this and how you can join the challenge
+            <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
+        </p>
+    </footer>
+<script src="{% static './js/reg_app.js' %}"></script>
+</body>
+</html>

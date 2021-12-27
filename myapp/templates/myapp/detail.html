@@ -1,0 +1,87 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+   <!-- Site CSS -->
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+   <!-- Responsive CSS -->
+   <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+   <!-- Custom CSS -->
+   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <title>Detail</title>
+</head>
+
+<body>
+
+    <!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="/">
+					<img src="{% static 'images/logo.png' %}" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="menu/">Menu</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Pages</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="/about">About</a>
+								<a class="dropdown-item" href="/reservation">Reservation</a>
+								<a class="dropdown-item" href="/stuff">Stuff</a>
+								<a class="dropdown-item" href="/gallery">Gallery</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="/blog">blog</a>
+								<a class="dropdown-item" href="/blog_details">blog Single</a>
+							</div>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Add</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="/add_product">Add product</a>
+								<a class="dropdown-item" href="/add_stuff">Add stuff</a>
+							</div>
+						</li>
+						<li class="nav-item"><a class="nav-link">user: {{ user.username }}</a></li>
+						<li class="nav-item"><a class="nav-link" href="/cart/">Cart</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+
+            <!--Main Section-->
+
+            <div class="row" style="margin: 0 auto">
+                        <div class="one mt-5 ms-3 col-3" style="width: 18rem;color: black">
+							<br><br>
+                            <img src="{{ data.image.url }}" class="card-img-top  rounded-3"  alt="...">
+                            <h1 class="card-title ms-2 mt-3">Название: {{ data.name }}</h1>
+							<h3 class="card-title ms-2 mt-3">Описание: {{ data.text }}</h3>
+                            <h1 class="card-title ms-2 mt-3">Цена: {{ data.price }} сум</h1>
+                            <h3 class="card-title ms-2 mt-3">Дата: {{ data.date }}</h3>
+							<a href="{% url 'cart_add' data.id %}" class="btn btn-outline-dark clear">Add</a>
+                        </div>
+            </div>
+            <!-- Footer section -->
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% load static %}
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">    
+   <!-- Site CSS -->
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+    <title>Add product</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class=" badge badge-success btn-lg btn-block mt-3">
+                <h1>обнавит продукт:</h1>
+            </div>
+        </div>
+        <div class="row pt-5 pb-5 col-12 justify-content-center">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+              <div class="mb-3">
+                    {% render_field data.name type="text" class="form-control" placeholder="name" aria-label="Name" aria-describedby="email-addon" %}
+                </div>
+                <div class="mb-3">
+                    {% render_field data.text type="text" class="form-control" placeholder="name" aria-label="Name" aria-describedby="email-addon" %}
+                </div>
+                <div class="mb-3">
+                    {% render_field data.price type="tel" class="form-control" placeholder="price" aria-label="Name" aria-describedby="email-addon" %}
+                </div>
+                <div class="mb-3">
+                    {% render_field data.image type="file" class="form-control" placeholder="image" aria-label="Name" aria-describedby="email-addon" %}
+                </div>
+                <div class="mb-3">
+                    {% render_field data.filter class="form-control" placeholder="filter" aria-label="Name" aria-describedby="email-addon" %}
+                </div>
+                <div class="row justify-content-center">
+                    <button style="border-radius: 50px; width: 10vw;" class="btn btn-outline-success btn-block" type="submit">обнавит</button>
+                </div>
+            </form>
+        </div>
+        <div class="row justify-content-center">
+            <h1 class="text-success">
+                {% for m in messages %}
+                {{ m }}
+                {% endfor %}
+            </h1>
+        </div>
+        <div class="row justify-content-center">
+<!--            {% for x in data %}-->
+<!--            <h1>Вы {{ x.date }} обнавили продукт: {{ x.name }}</h1>-->
+<!--            {% endfor %}-->
+        </div>
+    </div>
+
+	<div class="box d-flex ms-5 " >
+<!--		<ul class="ms-5">-->
+
+<!--			<li class="text-light fs-6 fw-bolder pb-3 mt-2"><a href="/update_p/data.id">update product</a></li>-->
+<!--			<li class="text-light fs-6 fw-bolder pb-3 mt-2"><a href="/">Basket</a></li>-->
+<!--		</ul>-->
+	</div>
+</body>
+</html>

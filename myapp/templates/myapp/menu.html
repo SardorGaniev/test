@@ -1,0 +1,84 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en"><!-- Basic -->
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+   
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+     <!-- Site Metas -->
+    <title>Yamifood Restaurant - Responsive HTML5 Template</title>  
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+
+<body>
+{% block content %}
+	<!-- Start All Pages -->
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>Меню</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End All Pages -->
+	
+		<!-- Start Menu -->
+	<div class="menu-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>Меню на ваш вкус</h2>
+						<p>Выберите пожалуйста ваши любимые блюда.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="special-menu text-center">
+						<div class="button-group filter-button-group">
+							<form method="get">
+								 <div class="mb-3">
+                    			{% render_field myFilter.filter placeholder="level"%}
+                                 </div>
+								{{myFilter.form}}
+								<button type="submit">Filter</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row special-list">
+				{% for x in items %}
+				<div class="col-lg-4 col-md-6 special-grid drinks">
+					<div class="gallery-single fix">
+						<img src="{{ x.image.url }}" class="img-fluid" alt="Image">
+						<div class="why-text">
+							<h4>{{ x.name }}</h4>
+							<h5>{{x.price}} сум</h5>
+							<p>{{ x.date }}</p>
+							<br>
+							<a href="{% url 'cart_add' x.id %}" class="btn btn-outline-dark">Add</a>
+							<a href="{% url 'product' x.id %}" class="btn btn-outline-dark" target="blank">detail</a>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- End Menu -->
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">    
+	<!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <title>Add stuff</title>
+</head>
+
+<body>
+<!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="/">
+					<img src="{% static 'images/logo.png' %}" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" href="menu/">Menu</a></li>
+						<li class="nav-item"><a class="nav-link" href="/stuff/">Stuff</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Add</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="/add_product">Add product</a>
+								<a class="dropdown-item" href="/add_stuff">Add stuff</a>
+							</div>
+						</li>
+						<li class="nav-item"><a class="nav-link">user: {{ user.username }}</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+    <div class="container">
+        <div class="row">
+            <div class=" badge badge-success btn-lg btn-block mt-3">
+                <h1>Добавить Повара:</h1>
+            </div>
+        </div>
+        <div class="row pt-5 pb-5 col-12 justify-content-center">
+            <form action="{% url 'add_stuff' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="row justify-content-center">
+                    <button class="btn btn-outline-dark clear" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+        <div class="row justify-content-center">
+            <h1 class="text-success">
+                {% for m in messages %}
+                {{ m }}
+                {% endfor %}
+            </h1>
+        </div>
+        <div class="row justify-content-center">
+            {% for x in items %}
+            <h1>You added Cook {{ x.fullname }} on {{ x.date }}</h1>
+            {% endfor %}
+        </div>
+
+        <!-- ALL JS FILES -->
+	    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	    <script src="{% static 'js/popper.min.js' %}"></script>
+	    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- ALL PLUGINS -->
+	    <script src="{% static 'js/jquery.superslides.min.js' %}"></script>
+	    <script src="{% static 'js/images-loded.min.js' %}"></script>
+	    <script src="{% static 'js/isotope.min.js' %}"></script>
+	    <script src="{% static 'js/baguetteBox.min.js' %}"></script>
+	    <script src="{% static 'js/form-validator.min.js' %}"></script>
+        <script src="{% static 'js/contact-form-script.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

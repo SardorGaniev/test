@@ -1,0 +1,64 @@
+{% load static %}
+{% load cart_tag %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <title>Корзина</title>
+</head>
+<body>
+
+<!-- Start header -->
+<header class="top-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'images/logo.png ' %}" alt="" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbars-rs-food">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/menu/">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link">user: {{ user.username }}</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/cart/">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- End header -->
+<div class="container">
+    <br><br><br><br>
+    {% for key,value in request.session.cart.items %}
+    <div class="row col-12 justify-content-between align-items-center">
+        <h1>{{value.name}}</h1>
+        <img src="{{value.image}}" alt="" width="200" height="200">
+        <h3>цена: {{value.price}} сум</h3>
+        <a href="{% url 'item_decrement' value.product_id %}">➖</a>
+        <h3>кол-во: {{value.quantity}}</h3>
+        <a href="{% url 'item_increment' value.product_id %}">➕</a>
+        <h3>Общ: {{ value.price|multiply:value.quantity }} сум</h3>
+        <a href="{% url 'item_clear' value.product_id %}" class="btn btn-outline-dark clear">Удалить</a>
+    </div>
+    {% endfor %}
+    <div class="row col-12 justify-content-center align-items-center d-flex">
+    <a href="{% url 'cart_clear'%}" class="btn btn-outline-dark clear">Очистить</a>
+    </div>
+
+</body>
+</html>

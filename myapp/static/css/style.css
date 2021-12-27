@@ -1332,6 +1332,11 @@ blockquote {
     color: #212529;
 }
 
+/* menu.html */
+.search{
+    border-radius: 25px;
+}
+
 
 
 

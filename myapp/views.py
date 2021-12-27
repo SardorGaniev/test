@@ -5,21 +5,30 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from .filters import *
-
 from cart.cart import Cart
+
+from django.db.models import Q
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def func(request):
     return render(request, 'myapp/index.html',)
 
 def menu(request):
-    items = Product.objects.all()
+    search_query = request.GET.get("search", "")
+    if search_query:
+        items = Product.objects.filter(Q(name=search_query))
+    else:
+        items = Product.objects.all()
     myFilter = ProductFilter(request.GET, queryset=items)
     items = myFilter.qs
 
+    paginator = Paginator(items, 3)
+    page = request.GET.get('page')
+    paged_products = paginator.get_page(page)
+
     context = {
-        'items': items,
+        'items': paged_products,
         'myFilter': myFilter
-        # 'cart': cart
     }
     return render(request, 'myapp/menu.html', context)
 
